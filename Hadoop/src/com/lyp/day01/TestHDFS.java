@@ -13,9 +13,14 @@ import org.junit.Test;
 
 public class TestHDFS {
 	FileSystem fs = null;
-	public void getConf() throws IOException {
+	{
 		Configuration conf = new Configuration();
-		 fs = FileSystem.get(conf);
+		 try {
+			fs = FileSystem.get(conf);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	/**
 	 *  测试上传
@@ -23,6 +28,7 @@ public class TestHDFS {
 	 */
 	@Test	
 	public void upload() throws IOException {
+		
 		Path src = new Path("D:/1.txt");
 		Path dst = new Path("hdfs://leiyp:9000/");
 		fs.copyFromLocalFile(src, dst);
