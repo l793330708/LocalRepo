@@ -12,20 +12,20 @@ import org.apache.hadoop.fs.Path;
 import org.junit.Test;
 
 public class TestHDFS {
-	
+	FileSystem fs = null;
+	public void getConf() throws IOException {
+		Configuration conf = new Configuration();
+		 fs = FileSystem.get(conf);
+	}
 	/**
 	 *  测试上传
 	 * @throws IOException 
 	 */
 	@Test	
 	public void upload() throws IOException {
-		Configuration conf = new Configuration();
-		
-		FileSystem fs = FileSystem.get(conf);
-		
-		FileInputStream io = new FileInputStream("D:/1.txt");
-		FSDataOutputStream os = fs.create(new Path("hdfs://192.168.79.131:9000/"));
-		IOUtils.copy(io, os);
+		Path src = new Path("D:/1.txt");
+		Path dst = new Path("hdfs://leiyp:9000/");
+		fs.copyFromLocalFile(src, dst);
 		
 		
 	}
@@ -35,7 +35,7 @@ public class TestHDFS {
 	@Test
 	public void download() {
 		
-	}
+	} 
 	/**
 	 * 列出目录
 	 */
