@@ -2,6 +2,7 @@ package com.lyp.mapreducer;
 
 import java.io.IOException;
 
+import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
@@ -12,7 +13,8 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 public class WCManager {
 
 	public static void main(String[] args) throws Exception {
-		Job job = Job.getInstance();
+		Job job = Job.getInstance(new Configuration());
+		
 		
 		//设置Mapper类
 		job.setMapperClass(WCMapper.class);
@@ -23,8 +25,8 @@ public class WCManager {
 		//设置输出value类型
 		job.setOutputValueClass(LongWritable.class);
 		//设置原始文件存放路径
-		FileInputFormat.setInputPaths(job, new Path("/mapreducer/input/"));
-		FileOutputFormat.setOutputPath(job, new Path("/mapreducer/output/"));
+		FileInputFormat.setInputPaths(job, new Path("/Downloads/1.txt"));
+		FileOutputFormat.setOutputPath(job, new Path("/Downloads/output2"));
 		//设置输出
 		job.setJarByClass(WCManager.class);
 		
